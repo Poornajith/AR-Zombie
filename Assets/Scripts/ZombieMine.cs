@@ -1,18 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ZombieMine : MonoBehaviour
 {
-    public ParticleSystem explosion;
-
+    public GameObject explosionEffect;
     private void OnTriggerEnter(Collider other)
     {
-      
-        transform.localScale = new Vector3(0.01f, 0.01f, 0.01f);
-        explosion.Play();
-       // Destroy(gameObject);
+        Explode();                    
     }
+    void Explode()
+    {
+        //create explosion effect
+        GameObject mineExplosion = Instantiate(explosionEffect, transform.position, transform.rotation);
 
-    
+        // destroy bomb
+        Destroy(gameObject);
+
+        //destroy explotion effect
+        Destroy(mineExplosion, 1f); 
+    }     
 }

@@ -12,8 +12,12 @@ public class AttackToTower : MonoBehaviour
     public GameObject target;
 
     private void Awake()
-    {       
-        targetPos = target.transform.position;
+    {   
+        if (target == null)
+        {
+            target = GameObject.Find("TowerToDefend");
+            targetPos = target.transform.position;
+        }
         
     }
     // Update is called once per frame
