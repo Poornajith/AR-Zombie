@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class AttackToTower : MonoBehaviour
@@ -9,28 +10,28 @@ public class AttackToTower : MonoBehaviour
     public Vector3 targetPos;
     public float speed = 50f;
 
-    public GameObject target;
+    GameObject target;
 
-    private void Awake()
-    {   
-        if (target == null)
-        {
-            target = GameObject.Find("TowerToDefend");
-            targetPos = target.transform.position;
-        }
-        
-    }
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = targetPos - transform.position;
-        transform.position += direction * speed * Time.deltaTime;
-        transform.LookAt(targetPos);
+        if (target == null)
+        {
+            target = GameObject.FindWithTag("defendable");
+            targetPos = target.transform.position;
+        }
+        if (target != null)
+        {
+            targetPos = target.transform.position;
+            Vector3 direction = targetPos - transform.position;
+            transform.position += direction * speed * Time.deltaTime;
+            transform.LookAt(targetPos);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-         Debug.Log("boom");
-         Destroy(gameObject);       
+        Destroy(gameObject);
+        target.GetComponent<TowerToDefend>().currentZombieCount--;
     }
 }

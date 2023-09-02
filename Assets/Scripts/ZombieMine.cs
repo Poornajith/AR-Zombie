@@ -2,13 +2,23 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class ZombieMine : MonoBehaviour
 {
     public GameObject explosionEffect;
+    GameObject target;
+    private void Awake()
+    {
+        if (target == null)
+        {
+            target = GameObject.FindWithTag("defendable");           
+        }
+    }
     private void OnTriggerEnter(Collider other)
     {
-        Explode();                    
+        Explode();
+        target.GetComponent<TowerToDefend>().deadZombieCount++;
     }
     void Explode()
     {

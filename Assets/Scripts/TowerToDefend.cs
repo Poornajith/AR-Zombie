@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class TowerToDefend : MonoBehaviour
 {
     public int towerHealth;
-    public GameObject gameOverPanel;
     public Text towerHealthText;
+    public GameObject towerHealthBar;
     public Vector3 towerposition;
 
     public GameObject zombiePrefab;
@@ -16,26 +17,34 @@ public class TowerToDefend : MonoBehaviour
     public float maxDistance = 3f;
     public int maxZombieCount = 10;
     public int currentZombieCount = 0;
+    public int deadZombieCount = 0;
     public float radius = 3f;
    
     void Awake()
     {
-        towerHealth = 100;
+        towerHealth = 200;
         towerposition = transform.position;
-        towerHealthText.text = towerHealth.ToString();
         StartCoroutine(Timer());
+
+        if(towerHealthText == null)
+        {
+            towerHealthText = GameObject.Find("Canvas").transform.Find("health").GetComponent<Text>();          
+        }
+
+        towerHealthText.text = towerHealth.ToString();
+        
     }
 
     private void Update()
     {
         if (towerHealth <= 0)
         {
-            gameOverPanel.SetActive(true);           
+            Time.timeScale = 0;                   
         }
 
         /*for(int i = 0; i < maxZombieCount; i++)
         {
-            
+
         }*/
     }
 
@@ -63,23 +72,20 @@ public class TowerToDefend : MonoBehaviour
             timer += 2.0f;
 
             // Call the function
-            ZombieSpawn();
-            if(currentZombieCount < maxZombieCount)
+            
+            if(currentZombieCount < maxZombieCount && timer >= 5f)
             {
-
+                ZombieSpawn();
             }
         }
     }
 
     void ZombieSpawn()
     {
-        Debug.Log("Zombie" + currentZombieCount);
         Vector2 randomPoint = Random.insideUnitCircle * radius;
         Vector3 position = new Vector3(randomPoint.x + transform.position.x + 1f, transform.position.y, randomPoint.y + transform.position.z + 1f);
         Instantiate(zombiePrefab, position, Quaternion.identity);
         currentZombieCount++;
-
-
     }
 
 }

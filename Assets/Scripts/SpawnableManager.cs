@@ -11,9 +11,12 @@ public class SpawnableManager : MonoBehaviour
     List<ARRaycastHit> m_Hits = new List<ARRaycastHit>();
 
     [SerializeField] GameObject spawnablePrefab;
+    [SerializeField] GameObject tower;
 
     Camera arCam;
     GameObject spawnedObject;
+
+    bool isTowerPlaced = false;
 
     void Start()
     {
@@ -39,9 +42,21 @@ public class SpawnableManager : MonoBehaviour
                     {
                         spawnedObject = hit.collider.gameObject;
                     }
+                    else if (hit.collider.gameObject == tower)
+                    {
+                        spawnedObject = hit.collider.gameObject;
+                    }
                     else
                     {
-                        SpawnPrefab(m_Hits[0].pose.position);
+                        if(isTowerPlaced)
+                        {
+                            SpawnPrefab(m_Hits[0].pose.position);
+                        }
+                        else
+                        {
+                            Instantiate(tower, m_Hits[0].pose.position, Quaternion.identity);
+                            isTowerPlaced = true;
+                        }
                     }
                 }
             }

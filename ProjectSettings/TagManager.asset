@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Spawnable
   - zombie
+  - defendable
   layers:
   - Default
   - TransparentFX
