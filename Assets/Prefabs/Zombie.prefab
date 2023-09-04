@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 892112884367636333}
   m_Layer: 0
   m_Name: Zombie
-  m_TagString: Untagged
+  m_TagString: zombie
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetPos: {x: 0, y: 0, z: 0}
   speed: 0.05
-  target: {fileID: 0}
 --- !u!1001 &6114033070385183311
 PrefabInstance:
   m_ObjectHideFlags: 0

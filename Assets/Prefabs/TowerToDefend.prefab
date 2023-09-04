@@ -117,7 +117,7 @@ Transform:
   m_GameObject: {fileID: 5652049322544243409}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.03, y: 0, z: 3.715726}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5037132372421328595}
@@ -161,6 +161,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   towerHealth: 60
   towerHealthText: {fileID: 0}
+  towerHealthBar: {fileID: 0}
   towerposition: {x: 0, y: 0, z: 0}
   zombiePrefab: {fileID: 4407677377077842975, guid: 8de3330ff3a5b124fa18bb5c1031b158,
     type: 3}
@@ -168,6 +169,7 @@ MonoBehaviour:
   maxDistance: 3
   maxZombieCount: 10
   currentZombieCount: 0
+  deadZombieCount: 0
   radius: 3
 --- !u!54 &1820391167614721041
 Rigidbody:

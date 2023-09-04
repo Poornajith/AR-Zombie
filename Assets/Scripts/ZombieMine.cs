@@ -6,7 +6,8 @@ using static UnityEngine.GraphicsBuffer;
 
 public class ZombieMine : MonoBehaviour
 {
-    public GameObject explosionEffect;
+    [SerializeField] public GameObject explosionEffect;
+    [SerializeField] AudioSource bombBlip;
     GameObject target;
     private void Awake()
     {
@@ -17,8 +18,11 @@ public class ZombieMine : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        Explode();
-        target.GetComponent<TowerToDefend>().deadZombieCount++;
+        if(other.gameObject.tag == "zombie")
+        {
+            Explode();    
+            target.GetComponent<TowerToDefend>().deadZombieCount++;
+        }
     }
     void Explode()
     {
@@ -27,6 +31,7 @@ public class ZombieMine : MonoBehaviour
 
         // destroy bomb
         Destroy(gameObject);
+        bombBlip.Play();
 
         //destroy explotion effect
         Destroy(mineExplosion, 1f); 

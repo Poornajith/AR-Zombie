@@ -9,6 +9,7 @@ public class ButtonFunctions : MonoBehaviour
     public void LoadGame()
     {
         SceneManager.LoadScene("Environment");
+        Time.timeScale = 1;
     }
 
     public void LoadMenu()

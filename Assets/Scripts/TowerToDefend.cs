@@ -26,7 +26,7 @@ public class TowerToDefend : MonoBehaviour
         towerposition = transform.position;
         StartCoroutine(Timer());
 
-        if(towerHealthText == null)
+        if (towerHealthText == null)
         {
             towerHealthText = GameObject.Find("Canvas").transform.Find("health").GetComponent<Text>();          
         }
@@ -41,11 +41,6 @@ public class TowerToDefend : MonoBehaviour
         {
             Time.timeScale = 0;                   
         }
-
-        /*for(int i = 0; i < maxZombieCount; i++)
-        {
-
-        }*/
     }
 
     // Update is called once per frame
