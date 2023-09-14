@@ -66,10 +66,9 @@ public class TowerToDefend : MonoBehaviour
             // Increment the timer
             timer += 2.0f;
 
-            // Call the function
-            
             if(currentZombieCount < maxZombieCount && timer >= 5f)
             {
+                // Call the function
                 ZombieSpawn();
             }
         }
@@ -78,9 +77,19 @@ public class TowerToDefend : MonoBehaviour
     void ZombieSpawn()
     {
         Vector2 randomPoint = Random.insideUnitCircle * radius;
-        Vector3 position = new Vector3(randomPoint.x + transform.position.x + 1f, transform.position.y, randomPoint.y + transform.position.z + 1f);
-        Instantiate(zombiePrefab, position, Quaternion.identity);
-        currentZombieCount++;
+        float randomX = randomPoint.x;
+        float randomY = randomPoint.y;
+        float towerX = transform.position.x;
+        float towerZ = transform.position.z;
+        float dx = Mathf.Abs(randomX - towerX);
+        float dy = Mathf.Abs(randomY - towerZ);
+
+        if(dx > 1f || dy > 1f)
+        {
+            Vector3 position = new Vector3(randomX + towerX, transform.position.y, randomY + towerZ);
+            Instantiate(zombiePrefab, position, Quaternion.identity);
+            currentZombieCount++;
+        }
     }
 
 }
